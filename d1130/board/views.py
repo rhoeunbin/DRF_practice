@@ -39,3 +39,11 @@ def board_detail(request, pk):
     else:
         board.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def example_view(request, format=None):
+    content = {'status' : 'request was permitted'}
+    return Response(content)
